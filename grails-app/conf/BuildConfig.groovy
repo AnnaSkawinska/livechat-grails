@@ -50,6 +50,7 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
         // runtime 'mysql:mysql-connector-java:5.1.27'
         // runtime 'org.postgresql:postgresql:9.3-1100-jdbc41'
+		compile "net.sf.ehcache:ehcache-core:2.4.6"
     }
 
     plugins {
@@ -59,10 +60,12 @@ grails.project.dependency.resolution = {
         // plugins for the compile step
         compile ":scaffolding:2.0.2"
         compile ':cache:1.1.1'
-		compile ":vaadin:7.1.11"
+		compile ":vaadin:7.1.11" // grails-vaadin plugin
+		compile ":mongodb:1.3.3" // mongoDB support
 
         // plugins needed at runtime but not for compilation
-        runtime ":hibernate:3.6.10.9" // or ":hibernate4:4.3.4"
+//        runtime ":hibernate:3.6.10.9" // or ":hibernate4:4.3.4" commented out so that Mongo is the only data provider
+		
         runtime ":database-migration:1.3.8"
         runtime ":jquery:1.11.0.2"
         runtime ":resources:1.2.7"
