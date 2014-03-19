@@ -1,8 +1,11 @@
-package app
+package pl.skawianna.ui
 
 import pl.skawianna.User;
 import pl.skawianna.UserService;
 
+import com.vaadin.ui.AbsoluteLayout;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI
 import com.vaadin.ui.VerticalLayout
 import com.vaadin.server.VaadinRequest
@@ -15,6 +18,10 @@ import com.vaadin.grails.Grails
  * @author
  */
 class MyUI extends UI {
+	
+	private TextField login
+	private Label error
+	private Button ok
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -26,13 +33,8 @@ class MyUI extends UI {
         layout.addComponent(label)
 		layout.addComponent(new Label("Yippie?"))
 
-//         example of how to get Grails service and call a method
-         List<User> users = Grails.get(UserService).getUsers()
-		 
-         for (User user : users) {
-            layout.addComponent(new Label(user.username))
-         }
-
-		setContent(layout)
+		setContent(new Welcome())
+		
+		
     }
 }

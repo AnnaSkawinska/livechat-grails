@@ -2,10 +2,10 @@ package pl.skawianna
 
 class User {
 	String username
-	String password
-	
+	Boolean online = false
+	String status = ""
 	
     static constraints = {
-		
+		status nullable:true
     }
 }
