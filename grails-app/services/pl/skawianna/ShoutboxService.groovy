@@ -8,8 +8,12 @@ import org.joda.time.Period
 @Transactional
 class ShoutboxService {
 
-    List<Shoutbox> listLast(Period period){
-		Shoutbox.findAllByTimestampGreaterThan(new DateTime().minus(period), 
+    List<Shoutbox> listLastRecent(Period period){
+		log.info("listLastRecent start - period: $period")
+		List<Shoutbox> result = Shoutbox.findAllByTimestampGreaterThan(
+			new DateTime().minus(period).toDate(), 
 			[sort: "timestamp", order: "asc"])
+		log.info("listLastRecent end - $result")
+		return result
 	}
 }

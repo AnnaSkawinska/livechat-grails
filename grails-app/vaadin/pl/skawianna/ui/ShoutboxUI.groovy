@@ -20,16 +20,19 @@ import com.vaadin.grails.Grails
  *
  * @author
  */
-class MyUI extends UI {
+class ShoutboxUI extends UI {
 	static {
 		SLF4JBridgeHandler.install();
-	}
+	 }
 	
-	private final static Logger log = Logger.getLogger(MyUI.class.getName());
+	private final static Logger log = Logger.getLogger(ShoutboxUI.class.getName());
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
-		log.info("init")
-		setContent(new Welcome())
+		log.info("init!")
+		
+		setContent(new Shoutbox())
+		
+		
     }
 }

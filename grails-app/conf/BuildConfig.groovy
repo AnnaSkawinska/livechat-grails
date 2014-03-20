@@ -63,6 +63,7 @@ grails.project.dependency.resolution = {
 		compile ":vaadin:7.1.11" // grails-vaadin plugin
 		compile ":mongodb:1.3.3" // mongoDB support
 		compile ":joda-time:1.4" // Joda Time types as persistent fields on domain classes
+//		compile ":mongo-jodatime:0.1.4"
 
         // plugins needed at runtime but not for compilation
 //        runtime ":hibernate:3.6.10.9" // or ":hibernate4:4.3.4" commented out so that Mongo is the only data provider
