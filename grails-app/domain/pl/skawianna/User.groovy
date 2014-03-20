@@ -7,5 +7,6 @@ class User {
 	
     static constraints = {
 		status nullable:true
+		username index:true, indexAttributes: [unique:true]
     }
 }

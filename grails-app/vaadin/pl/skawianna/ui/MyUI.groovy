@@ -1,5 +1,7 @@
 package pl.skawianna.ui
 
+import org.slf4j.bridge.SLF4JBridgeHandler;
+
 import pl.skawianna.User;
 import pl.skawianna.UserService;
 
@@ -18,7 +20,9 @@ import com.vaadin.grails.Grails
  * @author
  */
 class MyUI extends UI {
-	
+	static {
+		SLF4JBridgeHandler.install();
+	 }
 	private TextField login
 	private Label error
 	private Button ok
