@@ -27,9 +27,16 @@ class MyUI extends UI {
 	
 	private final static Logger log = Logger.getLogger(MyUI.class.getName());
 
+	private String myUsername
+	
     @Override
     protected void init(VaadinRequest vaadinRequest) {
 		log.info("init")
 		setContent(new Welcome())
     }
+	
+	public void joinLivechat(String username){
+		myUsername = username
+		setContent(new Shoutbox())
+	}
 }

@@ -4,12 +4,15 @@ import groovy.transform.ToString;
 
 @ToString
 class User {
+	/**
+	 * Not a persistent class - application users kept in application scope
+	 */
+	static mapWith = "none"
 	String username
-	Boolean online = false
 	String status = ""
 	
     static constraints = {
 		status nullable:true
-		username index:true, indexAttributes: [unique:true]
+//		username index:true, indexAttributes: [unique:true]
     }
 }
