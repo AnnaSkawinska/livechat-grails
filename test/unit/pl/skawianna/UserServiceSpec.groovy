@@ -16,5 +16,6 @@ class UserServiceSpec extends Specification {
     }
 
     void "test something"() {
+		expect: true
     }
 }

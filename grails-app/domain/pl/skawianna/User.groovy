@@ -1,5 +1,8 @@
 package pl.skawianna
 
+import groovy.transform.ToString;
+
+@ToString
 class User {
 	String username
 	Boolean online = false
