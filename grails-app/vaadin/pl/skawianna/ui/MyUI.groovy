@@ -12,6 +12,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI
 import com.vaadin.ui.VerticalLayout
 import com.vaadin.server.VaadinRequest
+import com.vaadin.server.VaadinService;
 import com.vaadin.ui.Label
 import com.vaadin.grails.Grails
 
@@ -27,16 +28,25 @@ class MyUI extends UI {
 	
 	private final static Logger log = Logger.getLogger(MyUI.class.getName());
 
-	private String myUsername
-	
     @Override
     protected void init(VaadinRequest vaadinRequest) {
-		log.info("init")
-		setContent(new Welcome())
+		log.info("init. current username? ${myUsername}")
+		if (myUsername){
+			setContent(new Shoutbox())
+		} else {
+			setContent(new Welcome())
+		}
     }
 	
 	public void joinLivechat(String username){
-		myUsername = username
+		VaadinService.currentRequest.wrappedSession.setAttribute("myUsername", username)
+		
 		setContent(new Shoutbox())
+	}
+	
+	public String getMyUsername(){
+		String myUsername = VaadinService.currentRequest.wrappedSession.getAttribute("myUsername")
+		log.info "myUsername: $myUsername"
+		return myUsername
 	}
 }
