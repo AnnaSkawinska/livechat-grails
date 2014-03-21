@@ -24,6 +24,13 @@ class UserService {
 		return result
 	}
 	
+	void setStatus(String username, String status){
+		log.info "setStatus start - username: $username, status: $status"
+		User user = userHolder.userSet.find{ user -> user.username == username}
+		user.status = status
+		log.info "setStatus end"
+	}
+	
 	List<String> formatUsersWithStatuses(){
 		log.info "formatUsersWithStatuses start"
 		List<User> users = getUsers()

@@ -27,9 +27,8 @@ class ShoutboxServiceSpec extends Specification {
 		new Shoutbox(timestamp: justNow.minusMinutes(6).toDate(), author: "celina", content: "6").save()
 		new Shoutbox(timestamp: justNow.minusMinutes(1).toDate(), author: "basia", content: "1").save()
 
-
 		when:
-		List<Shoutbox> recent = service.listLastRecent(new Period(0, 5, 0,0)) //5 mins
+		List<Shoutbox> recent = service.listSince(justNow.minus(new Period(0, 5, 0,0))) //5 mins
 		
 		then:
 		recent.size() == 2

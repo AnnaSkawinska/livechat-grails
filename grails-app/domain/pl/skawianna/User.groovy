@@ -17,6 +17,6 @@ class User {
     }
 	
 	public String formatForTable(){
-		"$username \n <i>${status ?: ''}</i>".toString()
+		"$username <i>${status ?: ''}</i>".toString()
 	}
 }

@@ -79,6 +79,7 @@ class MyUI extends UI implements BroadcastListener {
 	// Must also unregister when the UI expires
 	@Override
 	public void detach() {
+		log.info("detach")
 		Broadcaster.unregister(this);
 		super.detach();
 	}
