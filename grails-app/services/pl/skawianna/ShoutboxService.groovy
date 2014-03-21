@@ -16,4 +16,12 @@ class ShoutboxService {
 		log.info("listLastRecent end - $result")
 		return result
 	}
+	
+	void sendMessage(String message, String author){
+		log.info("sendMessage start - author: $author, message: $message")
+		
+		Shoutbox result = new Shoutbox(author: author, content: message, timestamp: new Date()).save()
+		
+		log.info("sendMessage end - $result")
+	}
 }

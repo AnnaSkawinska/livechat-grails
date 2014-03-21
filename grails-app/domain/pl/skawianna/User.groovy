@@ -15,4 +15,8 @@ class User {
 		status nullable:true
 //		username index:true, indexAttributes: [unique:true]
     }
+	
+	public String formatForTable(){
+		"$username \n <i>${status ?: ''}</i>".toString()
+	}
 }
