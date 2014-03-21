@@ -13,6 +13,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI
 import com.vaadin.ui.VerticalLayout
+import com.vaadin.ui.Window;
 import com.vaadin.server.VaadinRequest
 import com.vaadin.server.VaadinService;
 import com.vaadin.ui.Label
@@ -29,37 +30,51 @@ class MyUI extends UI implements BroadcastListener {
 	static {
 		SLF4JBridgeHandler.install();
 	}
-	
-	private final static Logger log = Logger.getLogger(MyUI.class.getName());
 
-	
-    @Override
-    protected void init(VaadinRequest vaadinRequest) {
+	private final static Logger log = Logger.getLogger(MyUI.class.getName());
+	private Window loginWindow
+	private Shoutbox shoutbox
+
+	@Override
+	protected void init(VaadinRequest vaadinRequest) {
 		log.info("init. current username? ${myUsername}")
-		if (myUsername){
-			setContent(new Shoutbox())
-		} else {
-			setContent(new Welcome())
+		shoutbox = new Shoutbox()
+		log.info("init - shoutbox: $shoutbox")
+		setContent(shoutbox)
+
+		if (!myUsername){
+			loginWindow = new Window(Grails.i18n("welcome.title"))
+			loginWindow.modal = true
+			loginWindow.closable = false
+
+			VerticalLayout subContent = new VerticalLayout();
+			loginWindow.setContent(subContent)
+			subContent.setMargin(true)
+			subContent.addComponent(new Welcome())
+
+			// Center it in the browser window
+			loginWindow.center();
+
+			// Open it in the UI
+			addWindow(loginWindow);
+
 		}
-		
+
 		// Register to receive server push broadcasts
 		Broadcaster.register(this)
-    }
-	
-	
+	}
+
+
 	@Override
 	public void receiveBroadcast(final String message) {
 		// Must lock the session to execute logic safely
 		access(new Runnable() {
-			@Override
-			public void run() {
-				
-				if (getContent() instanceof Shoutbox){
-					((Shoutbox)getContent()).fetchOnPush();
-				}
-				log.info "BROADCAST! $message"
-			}
-		});
+					@Override
+					public void run() {
+						getContent().fetchOnPush();
+						log.info "BROADCAST! $message"
+					}
+				});
 	}
 	// Must also unregister when the UI expires
 	@Override
@@ -67,18 +82,18 @@ class MyUI extends UI implements BroadcastListener {
 		Broadcaster.unregister(this);
 		super.detach();
 	}
-	
+
 	public void joinLivechat(String username){
 		VaadinService.currentRequest.wrappedSession.setAttribute("myUsername", username)
-		
-		setContent(new Shoutbox())
+		loginWindow.close()
+		shoutbox.updateLoginLabel()
 	}
-	
+
 	public String getMyUsername(){
 		String myUsername = VaadinService.currentRequest.wrappedSession.getAttribute("myUsername")
 		log.info "myUsername: $myUsername"
 		return myUsername
 	}
-	
-	
+
+
 }
