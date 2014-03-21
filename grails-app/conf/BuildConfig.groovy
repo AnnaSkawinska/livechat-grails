@@ -62,7 +62,7 @@ grails.project.dependency.resolution = {
         compile ":scaffolding:2.0.2"
         compile ':cache:1.1.1'
 		compile ":vaadin:7.1.11" // grails-vaadin plugin
-		compile ":mongodb:1.3.3" // mongoDB support
+		compile ":mongodb:2.0.0" // mongoDB support
 		compile ":joda-time:1.4" // Joda Time types as persistent fields on domain classes
 //		compile ":mongo-jodatime:0.1.4"
 
