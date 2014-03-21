@@ -1,3 +1,4 @@
+package pl.skawianna.beans
 import java.util.Set;
 
 import pl.skawianna.User;

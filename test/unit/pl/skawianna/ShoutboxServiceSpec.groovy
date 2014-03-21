@@ -13,13 +13,7 @@ import spock.lang.Specification
 @Mock([Shoutbox])
 class ShoutboxServiceSpec extends Specification {
 
-	def setup() {
-	}
-
-	def cleanup() {
-	}
-
-	void "recent feed"() {
+	void "list recent feed"() {
 		setup:
 		def justNow = new DateTime();
 
@@ -35,4 +29,17 @@ class ShoutboxServiceSpec extends Specification {
 		recent[0].content == "1" 
 		recent[1].content == "0" 
 	}
+	
+	void "send message"(){
+		when:
+		service.sendMessage("message", "author")
+		
+		then:
+		def shouts = Shoutbox.list()
+		shouts.size() == 1
+		shouts[0].content == "message"
+		shouts[0].author == "author"
+		
+	}
+	
 }

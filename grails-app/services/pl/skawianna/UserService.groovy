@@ -27,7 +27,7 @@ class UserService {
 	void setStatus(String username, String status){
 		log.info "setStatus start - username: $username, status: $status"
 		User user = userHolder.userSet.find{ user -> user.username == username}
-		user.status = status
+		user?.status = status
 		log.info "setStatus end"
 	}
 	
