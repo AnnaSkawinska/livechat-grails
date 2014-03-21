@@ -51,6 +51,7 @@ grails.project.dependency.resolution = {
         // runtime 'mysql:mysql-connector-java:5.1.27'
         // runtime 'org.postgresql:postgresql:9.3-1100-jdbc41'
 		compile "net.sf.ehcache:ehcache-core:2.4.6"
+		compile "com.vaadin:vaadin-push:7.1.11"
     }
 
     plugins {
